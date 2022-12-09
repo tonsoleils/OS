@@ -1,4 +1,4 @@
 #pragma once
 
-int PrimeCount(int A, int B);
-int* Sort(int* array);
+int PrimeCount(int a, int b); // объявление функции поиска простых чисел
+int* Sort(int* array); // объявление функции сортировки

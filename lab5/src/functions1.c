@@ -1,21 +1,22 @@
 #include "functions.h"
 
-typedef enum {false, true} bool;
-
 // Подсчёт количества простых чисел на отрезке [A, B] (A, B - натуральные)
 // Наивный алгоритм
 int PrimeCount(int a, int b) {
-    int count = 0;
+    int count = 0; // объявляем счётчик простых чисел
 
-    for (int i = a; i <= b; i++) {
-        int flag = true;
-        for (int j = i - 1; j >= a; j--) {
-            if (i % j == 0 && j != 1 && i == 1) {
-                flag = false;
+    for (int i = a; i <= b; i++) {  // Идём по всем целым числам от А до Б
+        int flag = 1; // флаг, говорящий нам о том, простое ли данное число
+        if (i == 1) { // Игнорируем единицу
+            flag = 0;
+        }
+        for (int j = i - 1; j >= a; j--) { // идём по всем числам левее от текущего
+            if (i % j == 0 && j != 1 && j != 0) { // если они делятся без остатка, и делитель - не 1 и делитель не 0
+                flag = 0; // оно не простое
             }
         }
-        if (flag) {
-            count++;
+        if (flag == 1) {
+            count++; // прибавляем счётчик если флаг не изменился
         }
     }
 
@@ -25,11 +26,11 @@ int PrimeCount(int a, int b) {
 // Пузырьковая сортировка
 int* Sort(int* array) {
     // Для всех элементов
-    int size = array[0];
+    int size = array[0]; //  получаем размер из нулевого элемента массива
 
-    for (int i = 1; i < size; i++) {
-        for (int j = size; j > i; j--) {
-            if (array[j - 1] > array[j]) {
+    for (int i = 1; i < size; i++) { // берем число
+        for (int j = size; j > i; j--) { // и сравниваем его с остальными
+            if (array[j - 1] > array[j]) { // если больше
                 int temp = array[j - 1]; // меняем их местами
                 array[j - 1] = array[j];
                 array[j] = temp;
